@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,19 +10,19 @@
 </head>
 <body>
 
-<form action="" method="sessions">
-    <?php
-<h1>
-    if(isset($_SESSION["nom"])){
-        echo "<div> tu est :".$_SESSION["nom"]." .<div>";
-    }else{
-        echo "saisi ton nom !!";
+<form action="exo7.php" methof="post">
+    <p>
+    
+    Saisir message : <input type="text" name="msg" value="">
+    <input type="submit" value="valider">
+</form>
+</p>
+<?php
+    if (isset($_POST['msg']))
+    {
+        $_SESSION['msg']=$_POST['msg'];
+        echo "Vous avez saisi : ".$_SESSION['msg'];
     }
-
-    ?>
-        <input type="texte" name="nom">
-        <input type="submit" name="formatairedeNom">
-    </form> 
-      
+?>
 </body>
 </html>
