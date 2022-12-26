@@ -1,41 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercice 8 php</title>
-</head>
-<body>
-<form action="" method="get">
+<?php session_start() ?> 
+<!DOCTYPE html >
+<html  lang =" fr ">
+    <tête >
+        <jeu de caractères méta  =" utf-8 " >
+        <titre > Exercice final premier parti : </titre>
+        <lien  rel =" feuille de style " href =" style.css ">                                                                                                    
+        <script  src =" script.js "> </script>    
+    </tête >
+    <corps>
+
+    <h1> Veuillez saisir votre Nom d'utilisateur et votre mot de passe : </h1>
+<?php
+
+ //Traitement du formulaire de connexion
+    if(isset($_POST["Connection"])){
+        if($_POST["password"]=="1234" && $_POST["login"]=="julien" ){
+ //si identifié alors session true
+    $_SESSION["EtatConnexion"]=true ;
+ }else{
+    if($_POST["password"]!="1234"){
+        echo "Ce n'est pas le bon mdp";
+ }
+    if($_POST["login"]!="julien"){
+        echo "Ce n'est pas le bon Login";
+ }
+ }
+ }
+
+ //Traitement du formulaire de deconnexion
+ if(isset($_POST["Deconnexion"])){
+    session_unset();
+    session_destroy();
+ }
+
+//si il y a une session on affiche le site sinon ça sera le formulaire de connexion
+if((isset($_SESSION["EtatConnexion"]) && $_SESSION["EtatConnexion"]==true)){
+    ?>
+        <p> Bienvenue julien !!! </p>
+        <form action="" method="post" class="form-example">
+            <div class="form-example">
+            <div class="form-example">
+                <input type="submit" value="Deconnexion" name="Deconnexion" >
+            </div>
+        </form>
     <?php
-     session_start();
-    if(isset($_GET["nom"])){
-        echo "<div> tu est :".$_GET["nom"]." .<div>";
+
     }else{
-        echo "saisi ton nom !!";
-    }
 
     ?>
-        <input type="texte" name="nom">
-        <input type="submit" name="formatairedeNom">
-    </form>   
-
-    <form action="exo7.php" methof="post">
-        <p>
-    
-        Saisir le mots de passe : <input type="text" name="msg" value="">
-        <input type="submit" value="valider">
-    </form>
-        </p>
+        <form action="" method="post" class="form-example">
+            <div class="form-example">
+                <label for="login">Entrer: </label>
+                <input type="text"  name="login" id="login" required placeholder="Non d'utilisateur : ">
+            </div>
+            <div class="form-example">
+                <label for="password"> Entrer: </label>
+                <input type="password"  name="password" id="password" required placeholder="Mots de pass : ">
+            </div>
+            <div class="form-example">
+                <input type="submit" value="Connection" name="Connection" >
+            </div>
+        </form>
     <?php
-        if (isset($_GET['msg']))
-    {
-        $_SESSION['msg']=$_GET['msg'];
-        echo "Vous avez saisi : ".$_SESSION['msg'];
-    }
+ }
+ //highlight_file(__FILE__);
+ ?>
 
-    ?>
-
-</body>
-</html>
+    </corps>
+</html>        
